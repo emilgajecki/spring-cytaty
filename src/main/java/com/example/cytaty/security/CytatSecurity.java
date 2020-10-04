@@ -16,14 +16,20 @@ public class CytatSecurity extends WebSecurityConfigurerAdapter {
 
     @Override
     protected void configure(HttpSecurity http) throws Exception {
-        http.authorizeRequests()
+        http.httpBasic()
+                .and()
+                .authorizeRequests()
                 .antMatchers(HttpMethod.GET, "/cytaty").permitAll()
                 .antMatchers(HttpMethod.POST, "/cytaty").hasRole("MODERATOR")
                 .antMatchers(HttpMethod.DELETE, "/cytaty").hasRole("ADMIN")
                 .and()
                 .formLogin().permitAll()
                 .and()
-                .logout().permitAll();
+                .logout().permitAll()
+                .and()
+                //wylaczenie bledu z postmana
+                .csrf().disable();
+
     }
 
     //dodawanie uzytkownikow

@@ -4,10 +4,7 @@ import com.example.cytaty.model.Cytat;
 import com.example.cytaty.repository.CytatReposiotory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
-import org.springframework.web.bind.annotation.DeleteMapping;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import javax.annotation.PostConstruct;
 import java.util.List;
@@ -27,7 +24,8 @@ public class CytatController {
 
     //odpowiada za wprowadzenie danych - np wprowadzanie danych z formularza
     @PostMapping("/cytaty")
-    public String dodajCytat(Cytat cytat){
+                            //odpowiada za przekazywanie parametrow
+    public String dodajCytat(@RequestBody Cytat cytat){
         reposiotory.save(cytat);
         return "Dodałem cytat " + cytat.getCytat();
     }
